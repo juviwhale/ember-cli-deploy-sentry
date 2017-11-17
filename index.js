@@ -126,7 +126,7 @@ module.exports = {
           method: 'POST',
           auth: this.generateAuth(),
           json: true,
-          body: this.requestBody(),
+          body: this._requestBody(),
           resolveWithFullResponse: true
         })
         .then(this._doUpload.bind(this))
@@ -142,12 +142,11 @@ module.exports = {
         };
         if (this.readConfig('repoName') && this.readConfig('commitID')) {
           reqBody.projects = this.readConfig('sentryProjects');
-        }
+        };
         if (this.readConfig('projects')) {
           reqBody.projects = this.readConfig('projects');
-        }
-        
-        return {};
+        };
+        return reqBody;
       },
       _doUpload: function doUpload() {
         return this._getFilesToUpload()
